@@ -4,7 +4,7 @@ public class Hello {
     System.out.println("Hello from Pipeline CI!");
     System.out.println("I am Allurkar Sushanth");
     System.out.println("Checking Web hooks");
-    System.out.println("Checking Web hooks after fix");
+    System.out.println("Checking Web hooks after fix2");
 
   }
 }

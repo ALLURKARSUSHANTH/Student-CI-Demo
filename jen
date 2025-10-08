@@ -45,12 +45,3 @@
       }
     }
   }
-
-  post {
-    always {
-        node{
-      archiveArtifacts artifacts: 'artifact.txt, out/**', allowEmptyArchive: false
-      }
-    }
-  }
-}

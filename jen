@@ -2,7 +2,15 @@
   agent none
   options { timestamps(); timeout(time: 15, unit: 'MINUTES') }
 
+ pipeline {
+  agent none
+  options { timestamps(); timeout(time: 15, unit: 'MINUTES') }
+
   stages {
+
+    /* 1) WHERE AM I — run on Controller (built-in) */
+    stage('Where am I (Controller)') {
+      agent { label 'built-in' }
 
     /* 1) WHERE AM I — run on Controller (built-in) */
     stage('Where am I (Controller)') {
@@ -10,8 +18,14 @@
       steps {
         echo "NODE = ${env.NODE_NAME}"
         echo "WORKSPACE = ${env.WORKSPACE}"
+        echo "NODE = ${env.NODE_NAME}"
+        echo "WORKSPACE = ${env.WORKSPACE}"
       }
     }
+
+    /* 2) BUILD & RUN — on Windows Agent (label: win) */
+    stage('Build on Windows Agent') {
+      agent { label 'win' }
 
     /* 2) BUILD & RUN — on Windows Agent (label: win) */
     stage('Build on Windows Agent') {
@@ -43,6 +57,12 @@
           }
         }
       }
+    }
+  }
+
+  post {
+    always {
+      archiveArtifacts artifacts: 'artifact.txt, out/**', allowEmptyArchive: false
     }
   }
 }
